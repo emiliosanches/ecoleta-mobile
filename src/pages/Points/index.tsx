@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 import Constants from 'expo-constants';
@@ -23,11 +23,28 @@ interface Point {
     longitude: number;
 }
 
+interface RouteParams {
+    uf: string;
+    city: string;
+}
+
 const Points = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [points, setPoints] = useState<Point[]>([]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
+
+    const route = useRoute();
+    const params = route.params as RouteParams;
+
+    var city: string, uf: string;
+    if (!params.city || typeof params.city == 'undefined' || params.city == '0' || params.city == '' || params.city == null) city = '';
+    else city = params.city;
+
+    if (!params.uf || typeof params.uf == 'undefined' || params.uf == '0' || params.uf == '' || params.uf == null) uf = '';
+    else uf = params.uf;
+
+    console.log(uf, city)
 
     useEffect(() => {
         async function loadPosition() {
@@ -60,8 +77,8 @@ const Points = () => {
     useEffect(() => {
         api.get('/points', {
             params: {
-                city: '',
-                uf: '',
+                city: city,
+                uf: uf,
                 items: selectedItems
             }
         }).then(response => {

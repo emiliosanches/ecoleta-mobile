@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 14984,
-  "expoServerNgrokUrl": "https://ce-whm.shadowz-013.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.ce-whm.shadowz-013.mobile.exp.direct",
-  "ngrokPid": 15024,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
